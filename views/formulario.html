@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Formulario</title>
+    <link rel="stylesheet" href="formulario.css" />
+</head>
+<body>
+    <div class="form-container">
+        <h2>Formulario contacto</h2>
+        <form id="contactForm">
+            <label for="nombre">Name</label>
+            <input type="text" id="nombre" placeholder="Type your name" required />
+            <label for="contacto">Contact</label>
+            <input type="text" id="contacto" placeholder="Ej: 809-888-999 or email" required />
+            <label for="mensaje">Message</label>
+            <input type="text" id="mensaje" placeholder="Type your message..." required />
+            <button type="submit">Send</button>
+        </form>
+        <p id="responseMsg"></p>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
