@@ -1,0 +1,280 @@
+/* RESET */
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    align-items:center;
+    padding:14px 60px;
+    background:#F3F3F3;
+}
+
+/* LOGO */
+.logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:26px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    color:#0A169F;
+}
+
+.logo svg{
+    width:24px;
+    height:24px;
+    stroke:#FF7A00;
+    fill:none;
+    stroke-width:2;
+}
+
+/* NAV */
+nav{
+    display:flex;
+    gap:26px;
+    margin-left:auto;
+    margin-right:20px;
+    position:relative;
+}
+
+/* BUTTONS */
+nav button{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:0.6px;
+    color:#0A169F;
+    position:relative;
+}
+
+/* HOVER */
+nav button:hover{
+    color:#FF7A00;
+}
+
+nav button::after{
+    content:"";
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:0%;
+    height:2px;
+    background:#FF7A00;
+    transition:0.35s;
+}
+
+nav button:hover::after{
+    width:100%;
+}
+
+/* PROFILE */
+.profile{
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:none;
+    background:none;
+}
+
+.profile svg{
+    width:26px;
+    height:26px;
+    stroke:#FF7A00;
+    fill:none;
+    stroke-width:2;
+}
+
+/* HAMBURGER */
+.menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    border:none;
+    background:none;
+    cursor:pointer;
+    margin-left:auto;
+}
+
+.menu-toggle span{
+    width:25px;
+    height:3px;
+    background:#0A169F;
+}
+
+/* MOBILE HIDDEN */
+.mobile-logo,
+.mobile-login{
+    display:none;
+}
+
+/* CONTENEDOR */
+.services-container{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+/* BOTÓN */
+.dropdown-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    color:#0A169F;
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+/* FLECHA */
+.arrow{
+    font-size:12px;
+    transition:0.3s;
+}
+
+/* DROPDOWN OCULTO */
+.dropdown-menu{
+    position:absolute;
+    top:100%;
+    left:0;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    display:none;
+    flex-direction:column;
+    min-width:200px;
+    z-index:1000; /* 👈 evita que se esconda */
+}
+
+/* LINKS */
+.dropdown-menu a{
+    padding:12px 16px;
+    text-decoration:none;
+    color:#0A169F;
+    font-weight:500;
+}
+
+.dropdown-menu a:hover{
+    background:#f5f5f5;
+    color:#FF7A00;
+}
+
+/* MOSTRAR SOLO EN HOVER (PC) */
+.services-container:hover .dropdown-menu{
+    display:flex;
+}
+
+/* ROTAR FLECHA */
+.services-container:hover .arrow{
+    transform:rotate(180deg);
+}
+
+@media (max-width:768px){
+
+    .dropdown-menu{
+        display:none 
+    }
+
+    .mobile-login svg{
+    width:26px;
+    height:26px;
+    stroke:#FF7A00; /* 👈 naranja */
+    fill:none;      /* 👈 sin relleno */
+    stroke-width:2;
+}
+
+    header{
+        padding:14px 20px;
+        justify-content:space-between;
+    }
+
+    .logo-text{
+        display:none;
+    }
+
+    .menu-toggle{
+        display:flex;
+    }
+
+    nav{
+        position:fixed;
+        top:0;
+        right:0;
+        width:260px;
+        height:100vh;
+        background:#F3F3F3;
+        flex-direction:column;
+        padding:80px 20px;
+        gap:20px;
+        transform:translateX(100%);
+        transition:0.3s;
+    }
+
+    nav.active{
+        transform:translateX(0);
+    }
+
+    nav button{
+        font-size:18px;
+        text-align:left;
+    }
+
+    .mobile-logo{
+        display:block;
+        font-size:20px;
+        font-weight:600;
+        margin-bottom:20px;
+        color:#0A169F;
+    }
+
+    .mobile-login{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        margin-top:20px;
+        border-top:1px solid #ddd;
+        padding-top:15px;
+    }
+
+    /* MOBILE SUBMENU */
+    .mobile-submenu{
+        position:fixed;
+        top:0;
+        right:-260px;
+        width:260px;
+        height:100vh;
+        background:#F3F3F3;
+        display:flex;
+        flex-direction:column;
+        padding:80px 20px;
+        gap:20px;
+        transition:0.3s;
+    }
+
+    .mobile-submenu.active{
+        right:0;
+    }
+
+    .back-btn{
+        font-weight:600;
+        cursor:pointer;
+    }
+
+    /* hide desktop dropdown */
+    .dropdown-menu{
+        display:none !important;
+    }
+
+    .profile{
+        display:none;
+    }
+}

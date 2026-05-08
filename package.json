@@ -3,6 +3,11 @@
     "nodemon": "^3.1.14"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-handlebars": "^9.0.1",
     "git": "^0.1.5"
   }
 }
