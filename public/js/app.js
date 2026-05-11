@@ -1,6 +1,7 @@
 const form = document.getElementById('contactForm');
 const responseMsg = document.getElementById('responseMsg');
 
+// Enviar datos del formulario al servidor sin recargar la página
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -11,7 +12,7 @@ form.addEventListener('submit', async (e) => {
   };
 
   try {
-    const res = await fetch('http://localhost:3000/api/mensajes', {
+    const res = await fetch('/api/mensajes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -28,3 +29,4 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
+// Mensajes de respuesta para el usuario según el resultado del envío

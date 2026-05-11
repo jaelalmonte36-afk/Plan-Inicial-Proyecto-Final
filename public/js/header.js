@@ -1,3 +1,4 @@
+// Espera a que el DOM cargue antes de usar los elementos
 document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.getElementById("menu-toggle");
     const nav = document.getElementById("nav-menu");
@@ -6,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileSubmenu = document.querySelector(".mobile-submenu");
     const backBtn = document.querySelector(".back-btn");
 
-    // 🍔 HAMBURGUESA
+    // Abrir o cerrar el menú principal con el botón hamburguesa
     toggle.addEventListener("click", () => {
         nav.classList.toggle("active");
         toggle.classList.toggle("active");
@@ -15,11 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // 📱 ABRIR SUBMENU (SOLO EN MOBILE)
     servicesBtn.addEventListener("click", (e) => {
         if (window.innerWidth <= 768) {
-            e.stopPropagation(); // 👈 evita conflictos
+            e.stopPropagation();
             mobileSubmenu.classList.add("active");
         }
     });
-
     //  BOTÓN BACK
     backBtn.addEventListener("click", () => {
         mobileSubmenu.classList.remove("active");

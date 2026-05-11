@@ -1,0 +1,125 @@
+/* Estilos del footer */
+.footer{
+    width: 100%;
+    background: #04086d;
+    padding: 40px 50px;
+    position: absolute;
+    margin-top: 0;
+    left: 0;
+    z-index: 10;
+
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.footer-box {
+    flex: 1;
+    min-width: 180px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.logo h2 {
+    color: white;
+    font-size: 28px;
+}
+
+.logo-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+}
+
+.logo-icon svg{
+    width: 100%;
+    height: 100%;
+}
+
+.footer-box p {
+    color: white;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    max-width: 320px;
+}
+
+.footer-box h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Botones de links */
+.footer-links button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.3s;
+    width: fit-content;
+}
+
+.footer-links button:hover {
+    color: orange;
+    transform: translateX(5px);
+}
+
+/* Redes */
+.socials {
+    display: flex;
+    gap: 12px;
+}
+
+.socials button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.socials button:hover {
+    color: orange;
+    transform: translateY(-4px);
+}
+
+/* Responsive */
+@media(max-width: 900px) {
+
+    .footer-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .logo h2 {
+        font-size: 24px;
+    }
+
+}
