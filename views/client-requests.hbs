@@ -1,0 +1,83 @@
+<main class="client-shell">
+    <section class="client-hero">
+        <div>
+            <span class="client-kicker">Client account</span>
+            <h1>My requests & reviews</h1>
+            <p>Check the review status of your inspections and leave a review when your completed project has a certificate.</p>
+        </div>
+    </section>
+
+    <section class="client-contact-card">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+            <h2>After sending an inspection</h2>
+            <p>Your request is saved. Please contact Michelle Ultra Services by Gmail or phone so the team can confirm the review schedule and next steps.</p>
+            <div class="client-contact-actions">
+                <a href="mailto:{{contactEmail}}"><i class="fa-solid fa-envelope"></i> {{contactEmail}}</a>
+                <a href="tel:+18135550101"><i class="fa-solid fa-phone"></i> {{contactPhone}}</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="client-request-list">
+        {{#each requests}}
+            <article class="client-request-card">
+                <div class="request-card-main">
+                    <div class="request-card-top">
+                        <div>
+                            <span class="request-code">Inspection #{{id_inspeccion}}</span>
+                            <h2>{{condicion_general}}</h2>
+                        </div>
+                        <span class="client-status status-{{statusClass status}}">{{status}}</span>
+                    </div>
+
+                    <p>{{statusText}}</p>
+
+                    <div class="request-detail-grid">
+                        <span><strong>Sent:</strong> {{formatDate inspection_date}}</span>
+                        <span><strong>Address:</strong> {{num_casa}} {{calle}}, {{ciudad}} {{estado}} {{codigo_postal}}</span>
+                        <span><strong>Estimate:</strong> {{money costo_estimado}}</span>
+                        {{#if id_proyecto}}
+                            <span><strong>Project:</strong> #{{id_proyecto}}</span>
+                            <span><strong>Start:</strong> {{formatDate fecha_inicio}}</span>
+                            <span><strong>Estimated end:</strong> {{formatDate fecha_estimada_fin}}</span>
+                            <span><strong>Contract:</strong> {{money monto_acordado}}</span>
+                        {{/if}}
+                        {{#if id_certificado}}
+                            <span><strong>Completed:</strong> {{formatDate fecha_finalizacion}}</span>
+                        {{/if}}
+                    </div>
+                </div>
+
+                {{#if canReview}}
+                    <form class="client-review-form" data-review-form>
+                        <input type="hidden" name="id_certificado" value="{{id_certificado}}">
+                        <label>Leave your review</label>
+                        <textarea name="opinion" rows="4" placeholder="Tell us how the service went..." required></textarea>
+                        <p class="review-message" aria-live="polite"></p>
+                        <button type="submit"><i class="fa-solid fa-star"></i> Send review</button>
+                    </form>
+                {{else}}
+                    {{#if id_resena}}
+                        <div class="client-review-saved">
+                            <span><i class="fa-solid fa-star"></i> Review sent on {{formatDate review_date}}</span>
+                            <p>{{opinion}}</p>
+                        </div>
+                    {{else}}
+                        <div class="client-review-locked">
+                            <i class="fa-regular fa-clock"></i>
+                            Reviews open after the project is completed and certified.
+                        </div>
+                    {{/if}}
+                {{/if}}
+            </article>
+        {{else}}
+            <section class="client-empty">
+                <i class="fa-regular fa-clipboard"></i>
+                <h2>No inspection requests yet</h2>
+                <p>Start from one of the service pages and your request status will appear here.</p>
+                <a href="/general">Request inspection</a>
+            </section>
+        {{/each}}
+    </section>
+</main>

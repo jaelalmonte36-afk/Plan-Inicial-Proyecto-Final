@@ -1,0 +1,308 @@
+PARAGRAPHS
+P3: INSTITUTO POLITÉCNICO INDUSTRIAL DE SANTIAGO (IPISA)
+P5: Nombre: Samir y jael
+P8: Numero: #18, #1
+P11: Profesora: Rafaelina Pichardo
+P14: Materia: base de datos.
+P26: Descripción del proceso de negocio al que pertenece la base de datos (Detalladamente)
+P28: El proceso de Rehabilitación Integral de Propiedades Residenciales para Renta de Michelle Ultra Services tiene como objetivo gestionar, mediante una base de datos, la transformación de propiedades en mal estado en unidades funcionales, certificadas y listas para alquiler.
+P29: El proceso inicia con la normalización de direcciones mediante la tabla DIRECCION (id_direccion, num_casa, calle, ciudad, estado, codigo_postal), que es referenciada por CLIENTE para evitar duplicación de datos. La PROPIEDAD (id_propiedad, num_casa, calle, ciudad, estado, codigo_postal) maneja su dirección directamente, ya que cada propiedad tiene una dirección única e irrepetible.
+P30: Se registran las PERSONAS (id_persona, nombre, email, telefono), que sirven como base para los demás actores del sistema. A partir de ahí se registra el CLIENTE (id_cliente, id_persona, id_direccion, empresa) y simultáneamente la PROPIEDAD.
+P31: El sistema cuenta con control de acceso mediante la tabla USUARIO (id_usuario, id_persona, rol, username, password_hash, fecha_creacion), que permite gestionar quién opera la base de datos. La relación entre PERSONA y USUARIO es de uno a uno: cada persona registrada puede tener un único usuario del sistema.
+P32: Antes de iniciar cualquier proyecto, se realiza una INSPECCION (id_inspeccion, id_propiedad, id_usuario, fecha, condicion_general, notas, costo_estimado) para evaluar el estado de la propiedad. Con esta información se crea el PROYECTO (id_proyecto, id_cliente, id_propiedad, id_inspeccion, fecha_inicio, fecha_estimada_fin), que relaciona al cliente con la propiedad. La inspección es obligatoria: no puede existir un proyecto sin una inspección previa. Inmediatamente se formaliza el acuerdo mediante un CONTRATO (id_contrato, id_proyecto, fecha_firma, monto_acordado, terminos, status).
+P33: Se definen los trabajos mediante ESPECIALIDAD (id_especialidad, tipo_trabajo, descripcion) y se detallan en SERVICIO (id_proyecto, id_especialidad, descripcion). Dado que un servicio puede ser ejecutado por varios subcontratistas, se gestiona esa relación mediante SERVICIO_SUBCONTRATISTA (id_proyecto, id_especialidad, id_subcontratista).
+P34: Para la ejecución se gestionan los SUBCONTRATISTAS (id_subcontratista, id_persona, status_legal, social_security, licencia_conducir, tiempo_experiencia), vinculados a sus especialidades mediante ESPECIALIDAD_SUBCONTRATISTA (id_especialidad, id_subcontratista), permitiendo que un subcontratista pueda tener más de una especialidad registrada.
+P35: Los MATERIALES (id_material, nombre, categoria, costo_unitario_actual) se compran en el momento del trabajo a proveedores externos. Los PROVEEDORES (id_proveedor, nombre, telefono, email, id_direccion) se registran de forma independiente para poder identificar a quién pertenece cada factura y a quién dirigir reclamaciones. La adquisición de materiales se gestiona mediante FACTURA_COMPRA (id_factura_compra, id_proyecto, id_proveedor, fecha, total), que es emitida por el proveedor externo, y su detalle en DETALLE_FACTURA_COMPRA (id_factura_compra, id_material, cantidad, precio_mom).
+P36: Una vez conocido el costo total de materiales y mano de obra, se emite la FACTURA_CLIENTE (id_factura_cliente, id_proyecto, fecha, subtotal, impuesto, total) dirigida al cliente. A partir de esta se genera el PAGO (id_pago, id_factura_cliente, precio_mano_obra, pago_inicial, pago_final, total). Las cuotas individuales se registran en CUOTA_PAGO (id_cuota, id_contrato, id_pago, numero_cuota, monto, fecha_pago, metodo_pago, status), que actúa como tabla puente entre CONTRATO y PAGO, dado que las cuotas se acuerdan en el contrato y se ejecutan como pagos.
+P37: Durante la ejecución, las actividades se documentan en REPORTE (id_reporte, id_proyecto, id_subcontratista, fecha, tiempo_laboral, observaciones). Al finalizar se emite el CERTIFICADO DE COMPLECION (id_certificado, id_proyecto, id_pago, fecha_finalizacion), y se registra la GARANTIA (id_garantia, id_certificado, fecha_inicio, fecha_vencimiento, descripcion, status) sobre el trabajo realizado.
+P38: Finalmente, los clientes pueden dejar su opinión en RESENAS (id_resena, id_certificado, opinion, fecha).
+P40: 2. Diagrama de entidad de relaciones Conceptual
+P41: modelo conceptual
+P42: https://lucid.app/lucidspark/ce48e5e9-2f91-4717-8b41-2fe42dc8a2dd/edit?viewport_loc=-3122%2C-3040%2C9056%2C4289%2C0_0&invitationId=inv_2772c6af-dd46-4a33-8281-46a047496725
+P43: 3. Modelo relacional(lógico) de la base de datos en el cual sean visibles las relaciones entre las distintas tablas, el grado de relación e incluyendo la opcionalidad.
+P58: 5. Diccionario de la base de datos de todas las entidades establecidas en el modelo relacional(lógico). a.
+P62: 1. Tabla: DIRECCION
+P65: 2. Tabla: PERSONA
+P70: 3. Tabla: CLIENTE
+P73: 4. Tabla: PROPIEDAD
+P76: 5. Tabla: USUARIO
+P78: 6. Tabla: INSPECCION
+P81: 7. Tabla: PROYECTO
+P85: 8. Tabla: CONTRATO
+P88: 9. Tabla: ESPECIALIDAD
+P96: 10. Tabla: SERVICIO
+P99: 11. Tabla: SUBCONTRATISTA
+P107: 12. Tabla: ESPECIALIDAD_SUBCONTRATISTA
+P110: 13. Tabla: SERVICIO_SUBCONTRATISTA
+P112: 14. Tabla: MATERIAL
+P116: 15. Tabla: FACTURA_COMPRA
+P119: 16. Tabla: DETALLE_FACTURA_COMPRA
+P128: 17. Tabla: FACTURA_CLIENTE
+P131: 18. Tabla: PAGO
+P137: 19. Tabla: CUOTA_PAGO
+P140: 20. Tabla: REPORTE
+P144: 21. Tabla: CERTIFICADO_COMPLECION
+P147: 22. Tabla: GARANTIA
+P156: 23. Tabla: RESEÑA
+P157: 24 Tabla: PROVEEDORE
+P160: 6. Clasificación de Tablas por Categoría
+P161: Las tablas del sistema se clasifican en cuatro categorías según su función dentro de la base de datos:
+P163: a. Tablas Principales
+P164: Son las que soportan el núcleo del sistema. Sin estas tablas no existe el proceso de negocio.
+P166: b. Tablas Auxiliares
+P167: Están para servir a las tablas principales, normalizando relaciones o evitando redundancia.
+P169: c. Tablas de Auditoría
+P170: Almacenan información o evidencias de procesos realizados en la base de datos.
+P172: d. Tablas de Acceso y Seguridad
+P173: Se usan para dar acceso a los usuarios y mantener la seguridad del sistema.
+P175: 7 - Algebra Relacional
+P176: Clientes con proyectos finalizados y su total pagado
+P177: π nombre_cliente, fecha_finalizacion, total (ρ nombre_cliente ← nombre (PERSONA ⋈ CLIENTE) ⋈ PROYECTO ⋈ CERTIFICADO_COMPLECION ⋈ PAGO)
+
+TABLES
+
+TABLE 0 rows=8 cols=7
+Tabla: DIRECCION | Tabla: DIRECCION | Tabla: DIRECCION | Tabla: DIRECCION | Tabla: DIRECCION | Tabla: DIRECCION | Tabla: DIRECCION
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_direccion | INT | 11 | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la dirección
+num_casa | VARCHAR | 10 | NOT NULL |  |               - | Número de casa o apartamento
+calle | VARCHAR | 100 | NOT NULL |  | - | Nombre de la calle
+ciudad | VARCHAR | 60 | NOT NULL |  | - | Ciudad de la dirección
+estado | char | 2 | NOT NULL |  | - | Estado o provincia
+codigo_postal | VARCHAR | 10 | NOT NULL |  | - | Código postal de la zona
+
+TABLE 1 rows=6 cols=7
+Tabla: PERSONA | Tabla: PERSONA | Tabla: PERSONA | Tabla: PERSONA | Tabla: PERSONA | Tabla: PERSONA | Tabla: PERSONA
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_persona | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la persona
+nombre | VARCHAR | 100 | NOT NULL |  | - | Nombre completo de la persona
+email | VARCHAR | 100 | NULL |  | - | Correo electrónico de contacto
+telefono | VARCHAR | 20 | NULL |  | - | Número de teléfono de contacto
+
+TABLE 2 rows=6 cols=7
+Tabla: CLIENTE | Tabla: CLIENTE | Tabla: CLIENTE | Tabla: CLIENTE | Tabla: CLIENTE | Tabla: CLIENTE | Tabla: CLIENTE
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_cliente | INT | 11 | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del cliente
+id_persona | INT | 11 | NOT NULL | FK | FK → PERSONA | Referencia a la persona base del cliente
+id_direccion | INT | 11 | NOT NULL | FK | - | Referencia a la dirección del cliente
+empresa | VARCHAR | 100 | NULL |  | - | Nombre de la empresa si aplica
+
+TABLE 3 rows=4 cols=7
+Tabla: PROPIEDAD | Tabla: PROPIEDAD | Tabla: PROPIEDAD | Tabla: PROPIEDAD | Tabla: PROPIEDAD | Tabla: PROPIEDAD | Tabla: PROPIEDAD
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_propiedad | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la propiedad
+id_direccion | INT |  |  NULL | FK | - | Referencia a la dirección de la propiedad
+
+TABLE 4 rows=8 cols=7
+Tabla: USUARIO | Tabla: USUARIO | Tabla: USUARIO | Tabla: USUARIO | Tabla: USUARIO | Tabla: USUARIO | Tabla: USUARIO
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_usuario | INT | 11 | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del usuario del sistema
+id_persona | INT | 11 | NOT NULL | FK | - | Referencia a la persona base del usuario
+rol | VARCHAR | 40 | Not  NULL |  | - | Rol del usuario dentro del sistema
+username | VARCHAR | 60 | NOT NULL |  | - | Nombre de usuario para inicio de sesión
+password_hash | VARCHAR | 255 | NOT NULL |  | - | Contraseña cifrada del usuario
+fecha_creacion | DATE | — | NOT NULL |  | - | Fecha de creación del usuario
+
+TABLE 5 rows=9 cols=7
+Tabla: INSPECCION | Tabla: INSPECCION | Tabla: INSPECCION | Tabla: INSPECCION | Tabla: INSPECCION | Tabla: INSPECCION | Tabla: INSPECCION
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_inspeccion | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la inspección
+id_propiedad | INT |  | NOT NULL | FK | - | Propiedad inspeccionada
+id_usuario | INT |  | NOT NULL | FK | - | Usuario que realizó la inspección
+fecha | DATE | — | NOT NULL |  | - | Fecha en que se realizó la inspección
+condicion_general | VARCHAR | 40 | NOT NULL |  | - | Condición general observada de la propiedad
+notas | TEXT | — | NULL |  | - | Observaciones adicionales del inspector
+costo_estimado | DECIMAL | 12,2 | NOT NULL |  | - | Costo estimado de la rehabilitación
+
+TABLE 6 rows=8 cols=7
+Tabla: PROYECTO | Tabla: PROYECTO | Tabla: PROYECTO | Tabla: PROYECTO | Tabla: PROYECTO | Tabla: PROYECTO | Tabla: PROYECTO
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_proyecto | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del proyecto
+id_cliente | INT |  | NOT NULL | FK | - | Cliente dueño del proyecto
+id_propiedad | INT |  | NOT NULL | FK | - | Propiedad a rehabilitar
+id_inspeccion | INT |  | NOT NULL | FK | - | Inspección previa asociada al proyecto
+fecha_inicio | DATE | — | NOT NULL |  | - | Fecha de inicio del proyecto
+fecha_estimada_fin | DATE | — | NOT NULL |  | - | Fecha estimada de finalización
+
+TABLE 7 rows=8 cols=7
+Tabla: CONTRATO | Tabla: CONTRATO | Tabla: CONTRATO | Tabla: CONTRATO | Tabla: CONTRATO | Tabla: CONTRATO | Tabla: CONTRATO
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_contrato | INT | 11 | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del contrato
+id_proyecto | INT | 11 | NOT NULL | FK | - | Proyecto al que pertenece el contrato
+fecha_firma | DATE | — | NOT NULL |  | - | Fecha de firma del contrato
+monto_acordado | DECIMAL | 12,2 | NOT NULL |  | - | Monto total acordado en el contrato
+términos | TEXT | — | NOT NULL |  | - | Términos y condiciones del contrato
+status | VARCHAR | 30 | NOT NULL |  | - | Estado actual del contrato
+
+TABLE 8 rows=5 cols=7
+Tabla: ESPECIALIDAD | Tabla: ESPECIALIDAD | Tabla: ESPECIALIDAD | Tabla: ESPECIALIDAD | Tabla: ESPECIALIDAD | Tabla: ESPECIALIDAD | Tabla: ESPECIALIDAD
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_especialidad | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la especialidad
+tipo_trabajo | VARCHAR | 80 | NOT NULL |  | - | Tipo de trabajo de la especialidad
+descripción | TEXT | — | NULL |  | - | Descripción detallada de la especialidad
+
+TABLE 9 rows=5 cols=7
+Tabla: SERVICIO | Tabla: SERVICIO | Tabla: SERVICIO | Tabla: SERVICIO | Tabla: SERVICIO | Tabla: SERVICIO | Tabla: SERVICIO
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_proyecto | INT |  | NOT NULL | PK / FK | - | Proyecto al que pertenece el servicio
+id_especialidad | INT |  | NOT NULL | PK / FK | - | Especialidad del servicio contratado
+descripción | text |  | NOT NULL |  | - | Descripción del servicio a realizar
+
+TABLE 10 rows=8 cols=7
+Tabla: SUBCONTRATISTA | Tabla: SUBCONTRATISTA | Tabla: SUBCONTRATISTA | Tabla: SUBCONTRATISTA | Tabla: SUBCONTRATISTA | Tabla: SUBCONTRATISTA | Tabla: SUBCONTRATISTA
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_subcontratista | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del subcontratista
+id_persona | INT |  | NOT NULL | FK | - | Referencia a la persona base del subcontratista
+status_legal | VARCHAR | 40 | NOT NULL |  | - | Estado legal del subcontratista
+social_security | VARCHAR | 20 | NOT NULL |  | - | Número de seguro social del subcontratista
+licencia_conducir | VARCHAR | 30 | NOT NULL |  | - | Número de licencia de conducir
+tiempo_experiencia | INT |  | NOT NULL |  | - | Años de experiencia del subcontratista
+
+TABLE 11 rows=4 cols=7
+Tabla: ESPECIALIDAD_SUBCONTRATISTA | Tabla: ESPECIALIDAD_SUBCONTRATISTA | Tabla: ESPECIALIDAD_SUBCONTRATISTA | Tabla: ESPECIALIDAD_SUBCONTRATISTA | Tabla: ESPECIALIDAD_SUBCONTRATISTA | Tabla: ESPECIALIDAD_SUBCONTRATISTA | Tabla: ESPECIALIDAD_SUBCONTRATISTA
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_especialidad | INT |  | NOT NULL |  FK | - | Especialidad del subcontratista
+id_subcontratista | INT |  | NOT NULL |  FK | - | Subcontratista vinculado
+
+TABLE 12 rows=5 cols=7
+Tabla: SERVICIO_SUBCONTRATISTA | Tabla: SERVICIO_SUBCONTRATISTA | Tabla: SERVICIO_SUBCONTRATISTA | Tabla: SERVICIO_SUBCONTRATISTA | Tabla: SERVICIO_SUBCONTRATISTA | Tabla: SERVICIO_SUBCONTRATISTA | Tabla: SERVICIO_SUBCONTRATISTA
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_proyecto | INT |  | NOT NULL |  FK | - | Proyecto del servicio
+id_especialidad | INT |  | NOT NULL |  FK | - | Especialidad del servicio
+id_subcontratista | INT |  | NOT NULL |  FK | - | Subcontratista asignado al servicio
+
+TABLE 13 rows=6 cols=7
+Tabla: MATERIAL | Tabla: MATERIAL | Tabla: MATERIAL | Tabla: MATERIAL | Tabla: MATERIAL | Tabla: MATERIAL | Tabla: MATERIAL
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_material | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del material
+nombre | VARCHAR | 100 | NOT NULL |  | - | Nombre del material
+categoría | VARCHAR | 60 | NOT NULL |  | - | Categoría a la que pertenece el material
+costo_unitario_actual | DECIMAL | 10,2 | NOT NULL |  | - | Costo unitario vigente del material
+
+TABLE 14 rows=6 cols=7
+Tabla: FACTURA_COMPRA | Tabla: FACTURA_COMPRA | Tabla: FACTURA_COMPRA | Tabla: FACTURA_COMPRA | Tabla: FACTURA_COMPRA | Tabla: FACTURA_COMPRA | Tabla: FACTURA_COMPRA
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_factura_compra | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la factura de compra
+id_proyecto | INT |  | NOT NULL | FK |  | Proyecto al que se carga la compra
+fecha | DATE | — | NOT NULL |  |  | Fecha de emisión de la factura de compra
+total | DECIMAL | 12,2 | NOT NULL |  |  | Total de la factura de compra
+
+TABLE 15 rows=6 cols=7
+Tabla: DETALLE_FACTURA_COMPRA | Tabla: DETALLE_FACTURA_COMPRA | Tabla: DETALLE_FACTURA_COMPRA | Tabla: DETALLE_FACTURA_COMPRA | Tabla: DETALLE_FACTURA_COMPRA | Tabla: DETALLE_FACTURA_COMPRA | Tabla: DETALLE_FACTURA_COMPRA
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_factura_compra | INT |  | NOT NULL | PK / FK |  | Factura de compra asociada al detalle
+id_material | INT |  | NOT NULL | PK / FK |  | Material adquirido
+cantidad | INT |  | NOT NULL |  |  | Cantidad comprada del material
+precio_mom | DECIMAL | 10,2 | NOT NULL |  |  | Precio del material en el momento de compra
+
+TABLE 16 rows=8 cols=7
+Tabla: FACTURA_CLIENTE | Tabla: FACTURA_CLIENTE | Tabla: FACTURA_CLIENTE | Tabla: FACTURA_CLIENTE | Tabla: FACTURA_CLIENTE | Tabla: FACTURA_CLIENTE | Tabla: FACTURA_CLIENTE
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_factura_cliente | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la factura al cliente
+id_proyecto | INT |  | NOT NULL | FK |  | Proyecto facturado al cliente
+fecha | DATE | — | NOT NULL |  |  | Fecha de emisión de la factura
+subtotal | DECIMAL | 12,2 | NOT NULL |  |  | Monto antes de impuestos
+impuesto | DECIMAL | 12,2 | NOT NULL |  |  | Monto de impuestos aplicados
+total | DECIMAL | 12,2 | NOT NULL |  |  | Monto total de la factura al cliente
+
+TABLE 17 rows=8 cols=7
+Tabla: PAGO | Tabla: PAGO | Tabla: PAGO | Tabla: PAGO | Tabla: PAGO | Tabla: PAGO | Tabla: PAGO
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_pago | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del pago
+id_factura_cliente | INT |  | NOT NULL | FK |  | Factura asociada al pago
+precio_mano_obra | DECIMAL | 12,2 | NOT NULL |  |  | Monto de mano de obra incluido en el pago
+pago_inicial | DECIMAL | 12,2 | NOT NULL |  |  | Monto del pago inicial realizado
+pago_final | DECIMAL | 12,2 | NOT NULL |  |  | Monto del pago final realizado
+total | DECIMAL | 12,2 | NOT NULL |  |  | Total del pago (inicial + final)
+
+TABLE 18 rows=9 cols=7
+Tabla: CUOTA_PAGO | Tabla: CUOTA_PAGO | Tabla: CUOTA_PAGO | Tabla: CUOTA_PAGO | Tabla: CUOTA_PAGO | Tabla: CUOTA_PAGO | Tabla: CUOTA_PAGO
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_cuota | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la cuota
+id_pago | INT |  | NOT NULL | FK |  | Pago al que pertenece la cuota
+numero_cuota | INT |  | NOT NULL |  |  | Número secuencial de la cuota
+monto | DECIMAL | 10,2 | NOT NULL |  |  | Monto de la cuota
+fecha_pago | DATE | — | NOT NULL |  |  | Fecha en que se realizó el pago de la cuota
+metodo_pago | VARCHAR | 40 | NOT NULL |  |  | Método utilizado para el pago
+status | VARCHAR | 30 | NOT NULL |  |  | Estado del pago de la cuota
+
+TABLE 19 rows=8 cols=7
+Tabla: REPORTE | Tabla: REPORTE | Tabla: REPORTE | Tabla: REPORTE | Tabla: REPORTE | Tabla: REPORTE | Tabla: REPORTE
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_reporte | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del reporte de actividad
+id_proyecto | INT |  | NOT NULL | FK |  | Proyecto al que pertenece el reporte
+id_subcontratista | INT |  | NOT NULL | FK |  | Subcontratista que genera el reporte
+fecha | DATE | — | NOT NULL |  |  | Fecha del reporte de actividad
+tiempo_laboral | DECIMAL | 5,2 | NOT NULL |  |  | Horas laboradas registradas en el reporte
+observaciones | TEXT | — | NOT NULL |  |  | Observaciones del trabajo realizado
+
+TABLE 20 rows=6 cols=7
+Tabla: CERTIFICADO_COMPLECION | Tabla: CERTIFICADO_COMPLECION | Tabla: CERTIFICADO_COMPLECION | Tabla: CERTIFICADO_COMPLECION | Tabla: CERTIFICADO_COMPLECION | Tabla: CERTIFICADO_COMPLECION | Tabla: CERTIFICADO_COMPLECION
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_certificado | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único del certificado de compleción
+id_proyecto | INT |  | NOT NULL | FK | unico | Proyecto finalizado certificado
+id_pago | INT |  | NOT NULL | FK | unico | Pago asociado al cierre del proyecto
+fecha_finalizacion | DATE | — | NOT NULL |  |  | Fecha en que se finalizó el proyecto
+
+TABLE 21 rows=8 cols=7
+Tabla: GARANTIA | Tabla: GARANTIA | Tabla: GARANTIA | Tabla: GARANTIA | Tabla: GARANTIA | Tabla: GARANTIA | Tabla: GARANTIA
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_garantia | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la garantía
+id_certificado | INT |  | NOT NULL | FK | unico | Certificado al que corresponde la garantía
+fecha_inicio | DATE | — | NOT NULL |  |  | Fecha de inicio de la garantía
+fecha_vencimiento | DATE | — | NOT NULL |  |  | Fecha de vencimiento de la garantía
+descripción | TEXT | — | NOT NULL |  |  | Descripción de los términos de la garantía
+status | VARCHAR | 30 | NOT NULL |  |  | Estado actual de la garantía
+
+TABLE 22 rows=6 cols=7
+Tabla: RESEÑA | Tabla: RESEÑA | Tabla: RESEÑA | Tabla: RESEÑA | Tabla: RESEÑA | Tabla: RESEÑA | Tabla: RESEÑA
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_reseña | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la reseña
+id_certificado | INT |  | NOT NULL | FK |  | Certificado al que se asocia la reseña
+opinion | TEXT | — | NOT NULL |  |  | Texto de la opinión del cliente
+fecha | DATE | — | NOT NULL |  |  | Fecha en que se registró la reseña
+
+TABLE 23 rows=7 cols=7
+Tabla: proveerdore | Tabla: proveerdore | Tabla: proveerdore | Tabla: proveerdore | Tabla: proveerdore | Tabla: proveerdore | Tabla: proveerdore
+Campo | Tipo de Dato | Longitud | Permite Nulos | Clave | Restricciones | Descripción
+id_proveedor /  | INT |  | NOT NULL | PK | AUTO_INCREMENT, único | Identificador único de la reseña
+Id_persona |  |  | NOT NULL | FK |  | Nombre completo deL PRO / 
+telefono | varchar | 20 | NOT NULL |  |  | Texto de la opinión del cliente
+ id_direccion | int |  | NOT NULL |  |  | Fecha en que se registró la reseña
+email | varchar | 100 | NOT NULL |  |  | 
+
+TABLE 24 rows=12 cols=2
+Tabla | Rol en el sistema
+PERSONA | Base de todos los actores del sistema
+CLIENTE | Contratante del servicio de rehabilitación
+PROPIEDAD | Inmueble que será rehabilitado
+PROYECTO | Eje central que une cliente, propiedad e inspección
+SUBCONTRATISTA | Ejecutor del trabajo de rehabilitación
+ESPECIALIDAD | Catálogo de tipos de trabajo disponibles
+SERVICIO | Trabajos específicos asignados a un proyecto
+MATERIAL | Materiales usados durante la rehabilitación
+PROVEEDOR | Empresa externa que suministra materiales
+PAGO | Registro del pago acordado con el cliente
+CERTIFICADO_COMPLECION | Confirma que la propiedad está lista para alquiler
+
+TABLE 25 rows=10 cols=2
+Tabla | Rol en el sistema
+DIRECCION | Centraliza las direcciones para evitar duplicación
+ESPECIALIDAD_SUBCONTRATISTA | Relaciona subcontratistas con sus especialidades
+SERVICIO_SUBCONTRATISTA | Asigna subcontratistas a servicios específicos
+DETALLE_FACTURA_COMPRA | Detalla los materiales de cada factura de compra
+FACTURA_COMPRA | Factura emitida por el proveedor al comprar materiales
+FACTURA_CLIENTE | Factura emitida al cliente por el servicio prestado
+CONTRATO | Formaliza el acuerdo entre cliente y empresa
+GARANTIA | Registra la garantía sobre el trabajo realizado
+CUOTA_PAGO | Puente entre contrato y pago; registra cada cuota acordada
+
+TABLE 26 rows=4 cols=2
+Tabla | Rol en el sistema
+INSPECCION | Evaluación inicial de la propiedad antes del proyecto
+REPORTE | Documenta las actividades durante la ejecución
+RESENA | Opinión del cliente al finalizar el proyecto
+
+TABLE 27 rows=2 cols=2
+Tabla | Rol en el sistema
+USUARIO | Controla el acceso al sistema por rol

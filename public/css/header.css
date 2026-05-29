@@ -117,6 +117,236 @@ nav button:hover::after,
     stroke-width: 2;
 }
 
+.account-menu {
+    position: relative;
+}
+
+.account-trigger {
+    min-width: 164px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(10, 22, 159, 0.12);
+    border-radius: 8px;
+    background: #ffffff;
+    color: #0A169F;
+    padding: 7px 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(10, 22, 159, 0.08);
+}
+
+.session-avatar {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff1e6;
+    color: #FF7A00;
+    flex-shrink: 0;
+    font-size: 14px;
+    line-height: 1;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.session-avatar-large {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    font-size: 17px;
+}
+
+.session-avatar i {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    line-height: 1;
+    text-align: center;
+}
+
+.session-avatar i::before {
+    display: block;
+    line-height: 1;
+}
+
+.account-copy {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.15;
+}
+
+.profile-name,
+.session-name {
+    max-width: 104px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #0A169F;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.session-role {
+    color: #777;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.account-trigger .fa-chevron-down {
+    margin-left: auto;
+    color: #FF7A00;
+    font-size: 11px;
+    transition: transform 0.2s ease;
+}
+
+.account-menu.open .account-trigger .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.account-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 292px;
+    display: none;
+    border: 1px solid rgba(10, 22, 159, 0.1);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 18px 38px rgba(10, 22, 159, 0.16);
+    overflow: hidden;
+    max-height: min(78vh, 620px);
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.account-menu.open .account-dropdown {
+    display: block;
+}
+
+.account-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    background: #f7f8ff;
+    border-bottom: 1px solid rgba(10, 22, 159, 0.08);
+}
+
+.account-summary .session-avatar {
+    background: #fff1e6;
+    border: 1px solid rgba(255, 122, 0, 0.16);
+}
+
+.account-summary strong,
+.account-summary span {
+    display: block;
+}
+
+.account-summary strong {
+    max-width: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #0A169F;
+    font-size: 14px;
+}
+
+.account-summary span {
+    color: #777;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+.account-dropdown a,
+.account-dropdown button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 0;
+    background: #ffffff;
+    color: #0A169F;
+    padding: 13px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.account-dropdown a i,
+.account-dropdown button i {
+    width: 18px;
+    min-width: 18px;
+    color: #0A169F;
+    text-align: center;
+}
+
+.account-dropdown a:hover,
+.account-dropdown button:hover {
+    background: #fff7ef;
+    color: #FF7A00;
+}
+
+.account-dropdown a:hover i,
+.account-dropdown button:hover i {
+    color: #FF7A00;
+}
+
+.account-menu-section {
+    display: block;
+    padding: 12px 16px 6px;
+    color: #6f7280;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+
+.account-logout {
+    border-top: 1px solid rgba(10, 22, 159, 0.08) !important;
+}
+
+.account-dropdown .account-logout {
+    border-radius: 0;
+    background: #ffffff;
+    color: #0A169F;
+    padding: 13px 16px;
+}
+
+.account-dropdown .account-logout:hover {
+    background: #fff7ef;
+    color: #FF7A00;
+}
+
+.logout-btn {
+    border: 1px solid #FF7A00;
+    border-radius: 4px;
+    background: #FF7A00;
+    color: #ffffff;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #e66f00;
+}
+
 /* HAMBURGER */
 .menu-toggle {
     display: none;
@@ -150,8 +380,12 @@ nav button:hover::after,
 
 /* ARROW */
 .arrow {
+    display: inline-block;
+    margin-left: 4px;
+    color: #0A169F;
     font-size: 12px;
-    transition: 0.3s;
+    transform-origin: center;
+    transition: color 0.22s ease, transform 0.28s ease, translate 0.28s ease;
 }
 
 /* DROPDOWN */
@@ -161,19 +395,45 @@ nav button:hover::after,
     left: 0;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    display: none;
+    box-shadow: 0 16px 34px rgba(10, 22, 159, 0.14);
+    display: flex;
     flex-direction: column;
     min-width: 220px;
     overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px) scale(0.98);
+    transform-origin: top left;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+    visibility: hidden;
     z-index: 999;
 }
 
 .dropdown-menu a {
+    position: relative;
     padding: 14px 18px;
     color: #0A169F;
     text-decoration: none;
     font-weight: 500;
+    transform: translateX(-6px);
+    opacity: 0;
+    transition: background 0.2s ease, color 0.2s ease, opacity 0.22s ease, transform 0.22s ease;
+}
+
+.dropdown-menu a:nth-child(1) {
+    transition-delay: 0.03s;
+}
+
+.dropdown-menu a:nth-child(2) {
+    transition-delay: 0.06s;
+}
+
+.dropdown-menu a:nth-child(3) {
+    transition-delay: 0.09s;
+}
+
+.dropdown-menu a:nth-child(4) {
+    transition-delay: 0.12s;
 }
 
 .dropdown-menu a:hover {
@@ -183,11 +443,21 @@ nav button:hover::after,
 
 /* SHOW DROPDOWN PC */
 .services-container:hover .dropdown-menu {
-    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    visibility: visible;
 }
 
-.services-container:hover .arrow {
-    transform: rotate(180deg);
+.services-container:hover .dropdown-menu a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.services-container:hover .arrow,
+.services-container.is-open .arrow {
+    color: #FF7A00;
+    transform: rotate(180deg) translateY(-1px);
 }
 
 /* MOBILE SUBMENU */
@@ -291,6 +561,20 @@ nav button:hover::after,
         font-weight: 600;
     }
 
+    .mobile-session {
+        align-items: flex-start;
+    }
+
+    .mobile-session div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .mobile-session .session-role {
+        font-size: 12px;
+    }
+
     .mobile-login svg {
         width: 26px;
         height: 26px;
@@ -305,6 +589,10 @@ nav button:hover::after,
     }
 
     .profile {
+        display: none;
+    }
+
+    .account-menu {
         display: none;
     }
 }

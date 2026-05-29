@@ -1,0 +1,141 @@
+<main class="admin-shell">
+    <section class="admin-hero">
+        <div>
+            <span class="admin-kicker">Purchase process</span>
+            <h1>Material purchases</h1>
+            <p>Register provider invoices with material type, quantity and unit price for each project.</p>
+        </div>
+        <a class="admin-hero-action" href="/admin/database">
+            <i class="fa-solid fa-database"></i>
+            Catalogs
+        </a>
+    </section>
+
+    <section class="process-grid purchase-layout">
+        <form class="process-panel process-form" data-admin-form data-materials-form data-endpoint="/api/admin/purchases">
+            <div class="panel-heading">
+                <span><i class="fa-solid fa-cart-plus"></i></span>
+                <div>
+                    <h2>purchase registration</h2>
+                    <p>Add one or more material lines to the same provider invoice.</p>
+                </div>
+            </div>
+
+            <label>project</label>
+            <select name="id_proyecto" required>
+                <option value="">select project</option>
+                {{#each projects}}
+                    <option value="{{id_proyecto}}">project #{{id_proyecto}} - {{cliente}} - {{status}}</option>
+                {{/each}}
+            </select>
+
+            <label>provider</label>
+            <select name="id_proveedor" required>
+                <option value="">select provider</option>
+                {{#each providers}}
+                    <option value="{{id_proveedor}}">#{{id_proveedor}} - {{nombre}}</option>
+                {{/each}}
+            </select>
+
+            <div class="material-lines">
+                <div class="material-line">
+                    <div>
+                        <label>material</label>
+                        <select name="id_material" required>
+                            <option value="">select material</option>
+                            {{#each materials}}
+                                <option
+                                    value="{{id_material}}"
+                                    data-price="{{costo_unitario_actual}}"
+                                    data-category="{{categoria}}"
+                                >
+                                    {{nombre}} - {{categoria}} - {{money costo_unitario_actual}}
+                                </option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>type</label>
+                        <input name="material_type" type="text" readonly placeholder="auto">
+                    </div>
+
+                    <div>
+                        <label>quantity</label>
+                        <input name="cantidad" type="number" min="1" step="1" required>
+                    </div>
+
+                    <div>
+                        <label>unit price</label>
+                        <input name="precio_mom" type="number" min="0" step="0.01" required>
+                    </div>
+
+                    <button class="line-remove" type="button" aria-label="Remove material line">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button class="light-btn add-material-line" type="button">
+                <i class="fa-solid fa-plus"></i> add material
+            </button>
+
+            <p class="process-message" aria-live="polite"></p>
+
+            <div class="process-actions">
+                <button class="light-btn" type="reset"><i class="fa-solid fa-plus"></i> new</button>
+                <button class="save-btn" type="submit"><i class="fa-regular fa-floppy-disk"></i> save</button>
+                <a class="light-btn danger-link" href="/admin"><i class="fa-solid fa-ban"></i> cancel</a>
+            </div>
+        </form>
+
+        <section class="process-panel process-list">
+            <div class="list-header">
+                <div>
+                    <h2>purchase list</h2>
+                    <p>Invoices saved with total material lines.</p>
+                </div>
+                <div class="search-box">
+                    <label>Search</label>
+                    <input class="table-search" type="search" data-table="#purchases-table" placeholder="provider, material, project">
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table id="purchases-table">
+                    <thead>
+                        <tr>
+                            <th>invoice</th>
+                            <th>project</th>
+                            <th>provider</th>
+                            <th>date</th>
+                            <th>materials</th>
+                            <th>total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each purchases}}
+                            <tr>
+                                <td>#{{id_factura_compra}}</td>
+                                <td>#{{id_proyecto}}</td>
+                                <td>{{proveedor}}</td>
+                                <td>{{formatDate fecha}}</td>
+                                <td>
+                                    <strong>{{material_count}} lines</strong>
+                                    <span>{{materials}}</span>
+                                </td>
+                                <td>{{money total}}</td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="6" class="empty-row">No material purchases registered yet.</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="print-btn" type="button"><i class="fa-solid fa-print"></i> print</button>
+        </section>
+    </section>
+</main>

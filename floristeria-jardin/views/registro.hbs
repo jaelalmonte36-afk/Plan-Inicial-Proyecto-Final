@@ -1,0 +1,22 @@
+<main class="auth-shell">
+  <section class="auth-card">
+    <a class="auth-close" href="/">x</a>
+    <span class="auth-icon"><i class="fa-solid fa-seedling"></i></span>
+    <h1>Registro</h1>
+    <p>Crea tu cuenta para hacer pedidos florales mas rapido y recibir recomendaciones personalizadas.</p>
+    <form class="ajax-form" action="/api/registro" method="post">
+      <label>Nombre</label>
+      <input name="nombre" autocomplete="name" required>
+      <label>Correo</label>
+      <input type="email" name="email" autocomplete="email" required>
+      <label>Telefono</label>
+      <input name="telefono" autocomplete="tel" required>
+      <label>Flor favorita</label>
+      <input name="flor_favorita" placeholder="Rosas, girasoles, lirios..." required>
+      <label>Contrasena</label>
+      <input type="password" name="password" autocomplete="new-password" required>
+      <button class="btn primary full" type="submit">Crear cuenta</button>
+    </form>
+    <p class="auth-switch">Ya tienes cuenta? <a href="/login">Inicia sesion</a></p>
+  </section>
+</main>

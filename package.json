@@ -12,6 +12,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-handlebars": "^9.0.1",
-    "git": "^0.1.5"
+    "git": "^0.1.5",
+    "mysql2": "^3.22.4"
   }
 }

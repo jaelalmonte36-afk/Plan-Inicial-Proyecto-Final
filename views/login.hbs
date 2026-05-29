@@ -1,0 +1,52 @@
+<main class="auth-shell">
+    <section class="auth-card" aria-labelledby="login-title">
+        <a class="auth-close" href="/" aria-label="Close">x</a>
+
+        <div class="auth-mark">
+            <i class="fa-solid fa-house"></i>
+        </div>
+
+        <h1 id="login-title">login</h1>
+        <p class="auth-subtitle">Welcome back! Log in to continue</p>
+
+        <form class="auth-form" action="/api/login" method="post" data-auth-endpoint="/api/login">
+            <label for="login-email">Email</label>
+            <div class="auth-input">
+                <i class="fa-regular fa-envelope"></i>
+                <input id="login-email" type="email" name="email" autocomplete="email" required>
+            </div>
+
+            <label for="login-password">Password</label>
+            <div class="auth-input">
+                <i class="fa-solid fa-lock"></i>
+                <input id="login-password" type="password" name="password" autocomplete="current-password" required>
+                <button class="password-toggle" type="button" aria-label="Show password">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
+            </div>
+
+            <a class="auth-link" href="#">You forgot your password?</a>
+
+            <label class="auth-check">
+                <input type="checkbox" name="remember">
+                <span>Remember my password</span>
+            </label>
+
+            <button class="auth-submit" type="submit">Login</button>
+        </form>
+
+        <div class="auth-divider">
+            <span>o continue con</span>
+        </div>
+
+        <button class="google-btn" type="button">
+            <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="">
+            Continue with google
+        </button>
+
+        <p class="auth-switch">
+            Don't have an account?
+            <a href="/signup">Sign Up</a>
+        </p>
+    </section>
+</main>

@@ -1,0 +1,16 @@
+<main class="auth-shell">
+  <section class="auth-card">
+    <a class="auth-close" href="/">x</a>
+    <span class="auth-icon"><i class="fa-solid fa-seedling"></i></span>
+    <h1>Iniciar sesion</h1>
+    <p>Entra para hacer pedidos florales mas rapido.</p>
+    <form class="ajax-form" action="/api/login" method="post">
+      <label>Correo</label>
+      <input type="email" name="email" autocomplete="email" required>
+      <label>Contrasena</label>
+      <input type="password" name="password" autocomplete="current-password" required>
+      <button class="btn primary full" type="submit">Entrar</button>
+    </form>
+    <p class="auth-switch">No tienes cuenta? <a href="/registro">Registrate</a></p>
+  </section>
+</main>

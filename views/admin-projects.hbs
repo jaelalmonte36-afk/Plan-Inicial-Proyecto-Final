@@ -1,0 +1,133 @@
+<main class="admin-shell">
+    <section class="admin-hero">
+        <div>
+            <span class="admin-kicker">Project process</span>
+            <h1>Projects & contracts</h1>
+            <p>Turn approved inspections into active projects and create the contract record in the same workflow.</p>
+        </div>
+        <a class="admin-hero-action" href="/admin/payments">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            Go to invoices
+        </a>
+    </section>
+
+    <section class="metric-grid">
+        <article class="metric-card">
+            <span>Total projects</span>
+            <strong>{{projectStats.total}}</strong>
+        </article>
+        <article class="metric-card">
+            <span>Active contracts</span>
+            <strong>{{projectStats.active}}</strong>
+        </article>
+        <article class="metric-card">
+            <span>Completed</span>
+            <strong>{{projectStats.completed}}</strong>
+        </article>
+        <article class="metric-card">
+            <span>Contracted total</span>
+            <strong>{{money projectStats.contractedTotal}}</strong>
+        </article>
+    </section>
+
+    <section class="process-grid">
+        <form class="process-panel process-form" data-admin-form data-endpoint="/api/admin/projects">
+            <div class="panel-heading">
+                <span><i class="fa-solid fa-file-circle-plus"></i></span>
+                <div>
+                    <h2>create project</h2>
+                    <p>Uses the project procedure after choosing an inspection without project.</p>
+                </div>
+            </div>
+
+            <label>approved inspection</label>
+            <select name="id_inspeccion" required>
+                <option value="">select pending inspection</option>
+                {{#each pendingInspections}}
+                    <option value="{{id_inspeccion}}">
+                        #{{id_inspeccion}} - {{cliente}} - {{address}}
+                    </option>
+                {{/each}}
+            </select>
+
+            <div class="compact-fields two-cols">
+                <div>
+                    <label>start date</label>
+                    <input name="fecha_inicio" type="date" required>
+                </div>
+                <div>
+                    <label>estimated end</label>
+                    <input name="fecha_estimada_fin" type="date" required>
+                </div>
+            </div>
+
+            <label>agreed amount</label>
+            <input name="monto_acordado" type="number" min="0" step="0.01" required>
+
+            <label>contract terms</label>
+            <textarea name="terminos" rows="6" placeholder="Payment terms, scope, completion notes..."></textarea>
+
+            <p class="process-message" aria-live="polite"></p>
+
+            <div class="process-actions">
+                <button class="light-btn" type="reset"><i class="fa-solid fa-plus"></i> new</button>
+                <button class="save-btn" type="submit"><i class="fa-regular fa-floppy-disk"></i> save</button>
+                <a class="light-btn danger-link" href="/admin"><i class="fa-solid fa-ban"></i> cancel</a>
+            </div>
+        </form>
+
+        <section class="process-panel process-list">
+            <div class="list-header">
+                <div>
+                    <h2>project list</h2>
+                    <p>Projects, contract amount, status and invoice count.</p>
+                </div>
+                <div class="search-box">
+                    <label>Search</label>
+                    <input class="table-search" type="search" data-table="#projects-table" placeholder="client, status, project">
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table id="projects-table">
+                    <thead>
+                        <tr>
+                            <th>project</th>
+                            <th>client</th>
+                            <th>start</th>
+                            <th>estimated end</th>
+                            <th>contract</th>
+                            <th>status</th>
+                            <th>invoices</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each projects}}
+                            <tr>
+                                <td>
+                                    <strong>#{{id_proyecto}}</strong>
+                                    <span>inspection #{{id_inspeccion}}</span>
+                                </td>
+                                <td>
+                                    <strong>{{cliente}}</strong>
+                                    <span>{{address}}</span>
+                                </td>
+                                <td>{{formatDate fecha_inicio}}</td>
+                                <td>{{formatDate fecha_estimada_fin}}</td>
+                                <td>{{money monto_acordado}}</td>
+                                <td><span class="status-pill status-{{statusClass status}}">{{status}}</span></td>
+                                <td>{{invoice_count}}</td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="7" class="empty-row">No projects registered yet.</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="print-btn" type="button"><i class="fa-solid fa-print"></i> print</button>
+        </section>
+    </section>
+</main>

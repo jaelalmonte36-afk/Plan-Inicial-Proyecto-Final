@@ -1,0 +1,62 @@
+<main class="auth-shell">
+    <section class="auth-card signup-card" aria-labelledby="signup-title">
+        <a class="auth-close" href="/" aria-label="Close">x</a>
+
+        <div class="auth-mark">
+            <i class="fa-solid fa-house"></i>
+        </div>
+
+        <h1 id="signup-title">Sign Up</h1>
+        <p class="auth-subtitle">Ready to get into the world of Michelle Ultra Services?</p>
+
+        <form class="auth-form" action="/api/signup" method="post" data-auth-endpoint="/api/signup">
+            <label for="signup-name">Name</label>
+            <div class="auth-input">
+                <i class="fa-regular fa-user"></i>
+                <input id="signup-name" type="text" name="name" autocomplete="name" required>
+            </div>
+
+            <label for="signup-company">Company</label>
+            <div class="auth-input">
+                <i class="fa-regular fa-building"></i>
+                <input id="signup-company" type="text" name="company" autocomplete="organization">
+            </div>
+
+            <label for="signup-email">Email</label>
+            <div class="auth-input">
+                <i class="fa-regular fa-envelope"></i>
+                <input id="signup-email" type="email" name="email" autocomplete="email" required>
+            </div>
+
+            <label for="signup-password">Password</label>
+            <div class="auth-input">
+                <i class="fa-solid fa-lock"></i>
+                <input id="signup-password" type="password" name="password" autocomplete="new-password" required>
+                <button class="password-toggle" type="button" aria-label="Show password">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
+            </div>
+
+            <label class="auth-check">
+                <input type="checkbox" name="remember">
+                <span>Remember my password</span>
+            </label>
+
+            <button class="auth-submit" type="submit">Sign Up</button>
+        </form>
+
+        <div class="auth-divider">
+            <span>o continue con</span>
+        </div>
+
+        <button class="google-btn" type="button">
+            <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="">
+            Continue with google
+        </button>
+
+        <p class="auth-switch">
+            Already have an account?
+            <a href="/login">Login</a>
+        </p>
+    </section>
+</main>

@@ -1,0 +1,44 @@
+<main>
+  <section class="page-hero compact-hero">
+    <p class="eyebrow">Pedido personalizado</p>
+    <h1>Haz tu pedido floral</h1>
+    <p>Completa los detalles y prepararemos un arreglo segun la ocasion, presupuesto y fecha de entrega.</p>
+  </section>
+
+  <section class="forms-band order-only">
+    <div class="form-panel" id="pedido">
+      <p class="eyebrow">Detalles del arreglo</p>
+      <h2>Pedido personalizado</h2>
+      <form class="ajax-form" action="/api/pedidos" method="post">
+        <div class="two-cols">
+          <input name="nombre_cliente" placeholder="Nombre del cliente" value="{{currentUser.nombre}}" required>
+          <input type="email" name="email_cliente" placeholder="Correo" value="{{currentUser.email}}" required>
+        </div>
+        <div class="two-cols">
+          <select name="tipo_arreglo" required>
+            <option value="">Tipo de arreglo</option>
+            <option>Ramo</option>
+            <option>Caja floral</option>
+            <option>Centro de mesa</option>
+            <option>Arreglo funebre</option>
+          </select>
+          <select name="ocasion" required>
+            <option value="">Ocasion</option>
+            <option>Cumpleanos</option>
+            <option>Aniversario</option>
+            <option>Boda</option>
+            <option>Condolencias</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="two-cols">
+          <input type="date" name="fecha_entrega" required>
+          <input type="number" min="1" step="0.01" name="presupuesto" placeholder="Presupuesto" required>
+        </div>
+        <input name="direccion_entrega" placeholder="Direccion de entrega" required>
+        <textarea name="dedicatoria" rows="4" placeholder="Dedicatoria o detalles especiales"></textarea>
+        <button class="btn primary" type="submit">Guardar pedido</button>
+      </form>
+    </div>
+  </section>
+</main>

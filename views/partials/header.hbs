@@ -1,17 +1,17 @@
 <header>
 
     <!-- LOGO -->
-    <div class="logo">
+    <a class="logo" href="/">
         <span class="logo-text">Michelle Ultra Services</span>
 
         <svg viewBox="0 0 24 24">
             <path d="M3 11L12 3l9 8"/>
             <path d="M5 10v10h14V10"/>
         </svg>
-    </div>
+    </a>
 
     <!-- HAMBURGUESA -->
-    <button id="menu-toggle" class="menu-toggle">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Open menu">
         <span></span>
         <span></span>
         <span></span>
@@ -24,60 +24,138 @@
             Michelle Ultra Services
         </div>
 
-        <a href="#hero" class="nav-link">Home</a>
-        <a href="#about" class="nav-link">About</a>
+        <a href="/#hero" class="nav-link">Home</a>
+        <a href="/#about" class="nav-link">About</a>
 
         <!-- SERVICES -->
         <div class="services-container">
 
-            <button class="dropdown-btn">
-                Services <span class="arrow">▾</span>
+            <button class="dropdown-btn" type="button">
+                Services <span class="arrow">v</span>
             </button>
 
             <!-- DROPDOWN PC -->
             <div class="dropdown-menu">
-                <a href="#">Painting</a>
-                <a href="#">Electrical Repair</a>
-                <a href="#">General Repair</a>
-                <a href="#">Cleaning</a>
+                <a href="/painting">Painting</a>
+                <a href="/electrical">Electrical Repair</a>
+                <a href="/general">General Repair</a>
+                <a href="/cleaning">Cleaning</a>
             </div>
 
         </div>
 
-        <a href="#choose" class="nav-link">Why Choose Us</a>
-        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="/#choose" class="nav-link">Why Choose Us</a>
+        <a href="/#testimonials" class="nav-link">Testimonials</a>
         <a href="#footer" class="nav-link">Contact</a>
 
-        <!-- MOBILE LOGIN -->
-        <div class="mobile-login">
+        {{#if currentUser}}
+            <div class="mobile-login mobile-session">
+                <span class="session-avatar"><i class="fa-solid fa-user"></i></span>
+                <div>
+                    <span class="session-name">{{#if currentUser.display_name}}{{currentUser.display_name}}{{else}}{{currentUser.username}}{{/if}}</span>
+                    <span class="session-role">{{currentUser.rol}}</span>
+                    <button class="logout-btn" type="button">Log out</button>
+                </div>
+            </div>
+        {{else}}
+            <a class="mobile-login" href="/login">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="4"></circle>
+                    <path d="M4 20c2-4 14-4 16 0"></path>
+                </svg>
+
+                <span>Log in / Sign up</span>
+            </a>
+        {{/if}}
+
+    </nav>
+
+    {{#if currentUser}}
+        <div class="account-menu">
+            <button class="account-trigger" type="button" aria-expanded="false" aria-label="Open account menu">
+                <span class="session-avatar"><i class="fa-solid fa-user"></i></span>
+                <span class="account-copy">
+                    <span class="profile-name">{{#if currentUser.display_name}}{{currentUser.display_name}}{{else}}{{currentUser.username}}{{/if}}</span>
+                    <span class="session-role">{{currentUser.rol}}</span>
+                </span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="account-dropdown" role="menu">
+                <div class="account-summary">
+                    <span class="session-avatar session-avatar-large"><i class="fa-solid fa-user"></i></span>
+                    <div>
+                        <strong>{{#if currentUser.display_name}}{{currentUser.display_name}}{{else}}{{currentUser.username}}{{/if}}</strong>
+                        <span>{{currentUser.rol}}</span>
+                    </div>
+                </div>
+
+                <a href="/general" role="menuitem">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    Request inspection
+                </a>
+                {{#unless @root.isAdmin}}
+                    <a href="/my-requests" role="menuitem">
+                        <i class="fa-solid fa-list-check"></i>
+                        My requests & reviews
+                    </a>
+                {{/unless}}
+                <a href="/#services" role="menuitem">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    Services
+                </a>
+                {{#if @root.isAdmin}}
+                    <div class="account-menu-section">Admin processes</div>
+                    <a href="/admin" role="menuitem">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        Admin dashboard
+                    </a>
+                    <a href="/admin/inspections" role="menuitem">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        Inspections
+                    </a>
+                    <a href="/admin/projects" role="menuitem">
+                        <i class="fa-solid fa-file-signature"></i>
+                        Projects & contracts
+                    </a>
+                    <a href="/admin/payments" role="menuitem">
+                        <i class="fa-solid fa-money-check-dollar"></i>
+                        Payments
+                    </a>
+                    <a href="/admin/purchases" role="menuitem">
+                        <i class="fa-solid fa-cart-flatbed"></i>
+                        Material purchases
+                    </a>
+                    <a href="/admin/database" role="menuitem">
+                        <i class="fa-solid fa-database"></i>
+                        Database control
+                    </a>
+                {{/if}}
+                <button class="logout-btn account-logout" type="button" role="menuitem">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Log out
+                </button>
+            </div>
+        </div>
+    {{else}}
+        <a class="profile" href="/login" aria-label="Log in or sign up">
             <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="8" r="4"></circle>
                 <path d="M4 20c2-4 14-4 16 0"></path>
             </svg>
-
-            <span>Log in / Sign up</span>
-        </div>
-
-    </nav>
-
-    <!-- PERFIL -->
-    <button class="profile">
-        <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="8" r="4"></circle>
-            <path d="M4 20c2-4 14-4 16 0"></path>
-        </svg>
-    </button>
+        </a>
+    {{/if}}
 
 </header>
 
 <!-- MOBILE SUBMENU -->
 <div class="mobile-submenu" id="mobile-submenu">
 
-    <button class="back-btn">← Back</button>
+    <button class="back-btn" type="button">Back</button>
 
-    <a href="#">Painting</a>
-    <a href="#">Electrical Repair</a>
-    <a href="#">General Repair</a>
-    <a href="#">Cleaning</a>
+    <a href="/painting">Painting</a>
+    <a href="/electrical">Electrical Repair</a>
+    <a href="/general">General Repair</a>
+    <a href="/cleaning">Cleaning</a>
 
 </div>

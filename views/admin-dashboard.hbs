@@ -1,0 +1,90 @@
+<main class="admin-shell">
+    <section class="admin-hero">
+        <div>
+            <span class="admin-kicker">Admin workspace</span>
+            <h1>Important processes</h1>
+            <p>Manage the operational flow from inspection request to project, contract, invoice, payment and material control.</p>
+        </div>
+        <a class="admin-hero-action" href="/admin/inspections">
+            <i class="fa-solid fa-clipboard-check"></i>
+            Start review
+        </a>
+    </section>
+
+    <section class="metric-grid">
+        <article class="metric-card">
+            <span>Inspections</span>
+            <strong>{{summary.inspections}}</strong>
+        </article>
+        <article class="metric-card">
+            <span>Pending review</span>
+            <strong>{{summary.pendingInspections}}</strong>
+        </article>
+        <article class="metric-card">
+            <span>Projects</span>
+            <strong>{{summary.projects}}</strong>
+        </article>
+        <article class="metric-card">
+            <span>Payments total</span>
+            <strong>{{money summary.paymentTotal}}</strong>
+        </article>
+    </section>
+
+    <section class="process-card-grid">
+        {{#each processes}}
+            <a class="admin-process-card" href="{{href}}">
+                <span class="process-card-icon"><i class="fa-solid {{icon}}"></i></span>
+                <span class="process-card-copy">
+                    <strong>{{title}}</strong>
+                    <span>{{text}}</span>
+                </span>
+                <em>{{metric}}</em>
+            </a>
+        {{/each}}
+    </section>
+
+    <section class="process-panel">
+        <div class="list-header">
+            <div>
+                <h2>recent inspections</h2>
+                <p>Latest requests entering the admin workflow.</p>
+            </div>
+            <a class="light-btn" href="/admin/inspections"><i class="fa-solid fa-arrow-up-right-from-square"></i> open</a>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>code</th>
+                        <th>client</th>
+                        <th>date</th>
+                        <th>condition</th>
+                        <th>status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each recentInspections}}
+                        <tr>
+                            <td>#{{id_inspeccion}}</td>
+                            <td>{{cliente}}</td>
+                            <td>{{formatDate fecha}}</td>
+                            <td>{{condicion_general}}</td>
+                            <td>
+                                {{#if id_proyecto}}
+                                    <span class="status-pill status-completado">project #{{id_proyecto}}</span>
+                                {{else}}
+                                    <span class="status-pill status-pending">pending</span>
+                                {{/if}}
+                            </td>
+                        </tr>
+                    {{else}}
+                        <tr>
+                            <td colspan="5" class="empty-row">No inspections registered yet.</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>

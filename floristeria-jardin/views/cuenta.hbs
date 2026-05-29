@@ -1,0 +1,28 @@
+<main class="account-shell">
+  <section class="account-hero">
+    <p class="eyebrow">Zona de usuario</p>
+    <h1>Hola, {{currentUser.nombre}}</h1>
+    <p>Desde aqui puedes revisar los pedidos florales que hiciste con tu cuenta iniciada.</p>
+    <a class="btn primary" href="/#pedido">Crear otro pedido</a>
+  </section>
+
+  <section class="account-list">
+    <h2>Mis pedidos recientes</h2>
+    {{#if pedidos}}
+      <div class="order-list">
+        {{#each pedidos}}
+          <article class="order-card">
+            <div>
+              <h3>{{tipo_arreglo}}</h3>
+              <p>{{ocasion}} - entrega: {{fecha_entrega}}</p>
+              <p>{{direccion_entrega}}</p>
+            </div>
+            <strong>RD$ {{presupuesto}}</strong>
+          </article>
+        {{/each}}
+      </div>
+    {{else}}
+      <p class="empty-state">Todavia no tienes pedidos guardados con esta cuenta.</p>
+    {{/if}}
+  </section>
+</main>

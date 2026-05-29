@@ -1,0 +1,70 @@
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Flores frescas todos los dias</p>
+      <h1>Arreglos florales que llegan con color, detalle y amor.</h1>
+      <p>Elige ramos, cajas florales y pedidos personalizados para cumpleanos, aniversarios, condolencias y eventos.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="/pedido">Hacer pedido</a>
+        <a class="btn ghost" href="/arreglos">Ver arreglos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ramos">
+    <div class="section-heading">
+      <p class="eyebrow">Catalogo</p>
+      <h2>Ramos populares</h2>
+    </div>
+    <div class="product-grid">
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=900&q=80" alt="Ramo de rosas rosadas">
+        <h3>Ramo romantico</h3>
+        <p>Rosas, eucalipto y papel premium.</p>
+      </article>
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=900&q=80" alt="Arreglo floral colorido">
+        <h3>Caja primavera</h3>
+        <p>Flores mixtas para regalos alegres.</p>
+      </article>
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?auto=format&fit=crop&w=900&q=80" alt="Flores blancas elegantes">
+        <h3>Elegancia blanca</h3>
+        <p>Ideal para bodas, mesas y condolencias.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="forms-band single-contact">
+    <div class="form-panel" id="contacto">
+      <p class="eyebrow">Estamos para ayudarte</p>
+      <h2>Contacto</h2>
+      <form class="ajax-form" action="/api/contacto" method="post">
+        <input name="nombre" placeholder="Nombre" required>
+        <input type="email" name="email" placeholder="Correo" required>
+        <input name="telefono" placeholder="Telefono" required>
+        <input name="asunto" placeholder="Asunto" required>
+        <textarea name="mensaje" rows="5" placeholder="Mensaje" required></textarea>
+        <button class="btn primary" type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div>
+      <p class="eyebrow">Ofertas y novedades</p>
+      <h2>Recibe ofertas florales</h2>
+    </div>
+    <form class="ajax-form subscribe-form" action="/api/suscripcion" method="post">
+      <input type="email" name="email" placeholder="Correo para ofertas" required>
+      <select name="preferencia" required>
+        <option value="">Preferencia</option>
+        <option>Rosas</option>
+        <option>Girasoles</option>
+        <option>Orquideas</option>
+        <option>Flores mixtas</option>
+      </select>
+      <button class="btn primary" type="submit">Suscribirme</button>
+    </form>
+  </section>
+</main>

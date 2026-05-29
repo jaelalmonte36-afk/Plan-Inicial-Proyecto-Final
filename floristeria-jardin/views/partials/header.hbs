@@ -1,0 +1,20 @@
+<header class="site-header">
+  <a class="brand" href="/">
+    <span class="brand-mark"><i class="fa-solid fa-seedling"></i></span>
+    <span>Floristeria Jardin</span>
+  </a>
+
+  <nav class="main-nav">
+    <a href="/arreglos">Arreglos</a>
+    <a href="/pedido">Pedido</a>
+    <a href="/#contacto">Contacto</a>
+    {{#if currentUser}}
+      <a href="/mi-cuenta">Mi cuenta</a>
+      <span class="user-pill"><i class="fa-solid fa-user"></i> {{currentUser.nombre}}</span>
+      <button class="nav-button logout-btn" type="button">Salir</button>
+    {{else}}
+      <a class="nav-button" href="/login">Entrar</a>
+      <a class="nav-button primary" href="/registro">Registro</a>
+    {{/if}}
+  </nav>
+</header>

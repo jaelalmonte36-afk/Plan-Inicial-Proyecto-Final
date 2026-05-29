@@ -1,0 +1,243 @@
+<main class="admin-shell">
+    <section class="admin-hero">
+        <div>
+            <span class="admin-kicker">Database process</span>
+            <h1>Database control</h1>
+            <p>Review important tables, views, procedures and triggers, then maintain safe manual catalogs.</p>
+        </div>
+        <a class="admin-hero-action" href="/admin/purchases">
+            <i class="fa-solid fa-cart-flatbed"></i>
+            Purchases
+        </a>
+    </section>
+
+    <section class="db-overview-grid">
+        <section class="process-panel">
+            <div class="panel-heading">
+                <span><i class="fa-solid fa-table"></i></span>
+                <div>
+                    <h2>important tables</h2>
+                    <p>Base tables that move the business process.</p>
+                </div>
+            </div>
+            <div class="db-chip-list">
+                {{#each tableCounts}}
+                    <span class="db-chip">{{table_name}} <strong>{{total}}</strong></span>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="process-panel db-stack">
+            <div>
+                <h2>views</h2>
+                <div class="db-chip-list compact">
+                    {{#each views}}
+                        <span class="db-chip">{{name}}</span>
+                    {{else}}
+                        <span class="empty-inline">No views found.</span>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div>
+                <h2>procedures</h2>
+                <div class="db-chip-list compact">
+                    {{#each routines}}
+                        <span class="db-chip">{{name}}</span>
+                    {{else}}
+                        <span class="empty-inline">No procedures found.</span>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div>
+                <h2>triggers</h2>
+                <div class="db-chip-list compact">
+                    {{#each triggers}}
+                        <span class="db-chip">{{name}} <strong>{{event_name}}</strong></span>
+                    {{else}}
+                        <span class="empty-inline">No triggers found.</span>
+                    {{/each}}
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="process-grid split-forms">
+        <form class="process-panel process-form" data-admin-form data-endpoint="/api/admin/providers">
+            <div class="panel-heading">
+                <span><i class="fa-solid fa-truck-field"></i></span>
+                <div>
+                    <h2>provider registration</h2>
+                    <p>Manual catalog entry used by purchases and materials.</p>
+                </div>
+            </div>
+
+            <label>provider name</label>
+            <input name="nombre" type="text" required>
+
+            <div class="compact-fields two-cols">
+                <div>
+                    <label>email</label>
+                    <input name="email" type="email" required>
+                </div>
+                <div>
+                    <label>phone</label>
+                    <input name="telefono" type="text" required>
+                </div>
+            </div>
+
+            <div class="address-grid">
+                <div>
+                    <label>house no.</label>
+                    <input name="num_casa" type="text" required>
+                </div>
+                <div>
+                    <label>street</label>
+                    <input name="calle" type="text" required>
+                </div>
+                <div>
+                    <label>city</label>
+                    <input name="ciudad" type="text" required>
+                </div>
+                <div>
+                    <label>state</label>
+                    <input name="estado" type="text" maxlength="2" required>
+                </div>
+                <div>
+                    <label>zip</label>
+                    <input name="codigo_postal" type="text" required>
+                </div>
+            </div>
+
+            <p class="process-message" aria-live="polite"></p>
+
+            <div class="process-actions">
+                <button class="light-btn" type="reset"><i class="fa-solid fa-plus"></i> new</button>
+                <button class="save-btn" type="submit"><i class="fa-regular fa-floppy-disk"></i> save</button>
+            </div>
+        </form>
+
+        <form class="process-panel process-form" data-admin-form data-endpoint="/api/admin/materials">
+            <div class="panel-heading">
+                <span><i class="fa-solid fa-boxes-stacked"></i></span>
+                <div>
+                    <h2>material registration</h2>
+                    <p>Manual material catalog for purchase invoices.</p>
+                </div>
+            </div>
+
+            <label>provider</label>
+            <select name="id_proveedor" required>
+                <option value="">select provider</option>
+                {{#each providers}}
+                    <option value="{{id_proveedor}}">#{{id_proveedor}} - {{nombre}}</option>
+                {{/each}}
+            </select>
+
+            <label>material name</label>
+            <input name="nombre" type="text" required>
+
+            <div class="compact-fields two-cols">
+                <div>
+                    <label>material type</label>
+                    <input name="categoria" type="text" required>
+                </div>
+                <div>
+                    <label>unit price</label>
+                    <input name="costo_unitario_actual" type="number" min="0" step="0.01" required>
+                </div>
+            </div>
+
+            <p class="process-message" aria-live="polite"></p>
+
+            <div class="process-actions">
+                <button class="light-btn" type="reset"><i class="fa-solid fa-plus"></i> new</button>
+                <button class="save-btn" type="submit"><i class="fa-regular fa-floppy-disk"></i> save</button>
+                <a class="light-btn danger-link" href="/admin"><i class="fa-solid fa-ban"></i> cancel</a>
+            </div>
+        </form>
+    </section>
+
+    <section class="process-grid">
+        <section class="process-panel process-list">
+            <div class="list-header">
+                <div>
+                    <h2>providers</h2>
+                    <p>Current providers available for purchases.</p>
+                </div>
+                <div class="search-box">
+                    <label>Search</label>
+                    <input class="table-search" type="search" data-table="#providers-table" placeholder="provider, email">
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table id="providers-table">
+                    <thead>
+                        <tr>
+                            <th>code</th>
+                            <th>provider</th>
+                            <th>email</th>
+                            <th>phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each providers}}
+                            <tr>
+                                <td>#{{id_proveedor}}</td>
+                                <td>{{nombre}}</td>
+                                <td>{{email}}</td>
+                                <td>{{telefono}}</td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="4" class="empty-row">No providers registered yet.</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="process-panel process-list">
+            <div class="list-header">
+                <div>
+                    <h2>materials</h2>
+                    <p>Material catalog used by purchase invoices.</p>
+                </div>
+                <div class="search-box">
+                    <label>Search</label>
+                    <input class="table-search" type="search" data-table="#materials-table" placeholder="material, type">
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table id="materials-table">
+                    <thead>
+                        <tr>
+                            <th>code</th>
+                            <th>material</th>
+                            <th>type</th>
+                            <th>provider</th>
+                            <th>unit price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each materials}}
+                            <tr>
+                                <td>#{{id_material}}</td>
+                                <td>{{nombre}}</td>
+                                <td>{{categoria}}</td>
+                                <td>{{proveedor}}</td>
+                                <td>{{money costo_unitario_actual}}</td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="5" class="empty-row">No materials registered yet.</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+</main>

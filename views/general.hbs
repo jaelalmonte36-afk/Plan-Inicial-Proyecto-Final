@@ -1,0 +1,65 @@
+<main class="service-page general-theme">
+    <section class="service-hero">
+        <div class="service-hero__content">
+            <span class="service-eyebrow">General Repair</span>
+            <h1>Fast general repairs for everyday home needs.</h1>
+            <p>Reliable maintenance and repair services for homes, offices and commercial spaces.</p>
+            <div class="service-actions">
+                <a href="#request" class="service-button">Get a free estimate</a>
+                <a href="#services" class="service-button service-button--outline">Our services</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-main">
+        <form class="service-request-form" id="request">
+            <input type="hidden" name="service_type" value="General Repair">
+            <span class="service-eyebrow">Service Request</span>
+            <h2>Submit a Service Request</h2>
+
+            <input type="text" name="num_casa" placeholder="House number" required>
+            <input type="text" name="calle" placeholder="Street" required>
+            <input type="text" name="ciudad" placeholder="City" required>
+            <input type="text" name="estado" placeholder="State (2 letters)" maxlength="2" required>
+            <input type="text" name="codigo_postal" placeholder="Zip code" required>
+            <input type="text" name="condicion_general" placeholder="General condition of the house" required>
+            <textarea name="message" placeholder="Description of the problem" required></textarea>
+
+            <button type="submit">Send request</button>
+            <p class="service-form-message" aria-live="polite"></p>
+        </form>
+
+        <div class="service-list" id="services">
+            <span class="service-eyebrow">Our general repair services</span>
+            <h2>Complete repair solutions</h2>
+
+            <div class="service-cards">
+                <article class="service-card">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <h3>Home maintenance</h3>
+                    <p>General fixes and maintenance for your home.</p>
+                </article>
+                <article class="service-card">
+                    <i class="fa-solid fa-door-open"></i>
+                    <h3>Door repair</h3>
+                    <p>Repair doors, hinges, locks and handles.</p>
+                </article>
+                <article class="service-card">
+                    <i class="fa-solid fa-chair"></i>
+                    <h3>Furniture repair</h3>
+                    <p>Fix cabinets, tables, shelves and furniture pieces.</p>
+                </article>
+                <article class="service-card">
+                    <i class="fa-solid fa-hammer"></i>
+                    <h3>Small repairs</h3>
+                    <p>Quick repair jobs for homes, rentals and businesses.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-why">
+        <span class="service-eyebrow">Why choose us</span>
+        <h2>Trusted general repair experts</h2>
+    </section>
+</main>

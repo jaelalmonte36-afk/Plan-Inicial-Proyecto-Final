@@ -1,125 +1,151 @@
-/* Estilos del footer */
 .footer{
-    width: 100%;
-    background: #04086d;
-    padding: 40px 50px;
-    position: absolute;
-    margin-top: 0;
-    left: 0;
-    z-index: 10;
-
+    width:100%;
+    background:#04086d;
+    padding:52px 8% 24px;
+    color:white;
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 50px;
-    flex-wrap: wrap;
+    display:grid;
+    grid-template-columns:1.6fr 1fr 1fr 1.2fr;
+    gap:38px;
+    align-items:start;
 }
 
 .footer-box {
-    flex: 1;
-    min-width: 180px;
+    min-width:0;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
+.footer-logo {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
 }
 
-.logo h2 {
-    color: white;
-    font-size: 28px;
+.footer-logo h2 {
+    color:white;
+    font-size:24px;
+    line-height:1.15;
+    margin:0;
 }
 
 .logo-icon{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 55px;
-    height: 55px;
-
-    flex-shrink: 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:46px;
+    height:46px;
+    flex-shrink:0;
 }
 
 .logo-icon svg{
-    width: 100%;
-    height: 100%;
+    width:100%;
+    height:100%;
 }
 
 .footer-box p {
-    color: white;
-    font-size: 16px;
-    line-height: 1.4;
-    margin-bottom: 25px;
-    max-width: 320px;
+    color:rgba(255,255,255,0.82);
+    font-size:15px;
+    line-height:1.55;
+    margin:0 0 22px;
+    max-width:360px;
 }
 
 .footer-box h3 {
-    color: white;
-    margin-bottom: 20px;
-    font-size: 20px;
+    color:white;
+    margin:0 0 18px;
+    font-size:18px;
 }
 
 .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
 }
 
-/* Botones de links */
-.footer-links button {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: left;
-    transition: 0.3s;
-    width: fit-content;
+.footer-links a,
+.footer-contact p {
+    color:rgba(255,255,255,0.82);
+    font-size:15px;
+    text-decoration:none;
+    transition:color 0.2s ease, transform 0.2s ease;
 }
 
-.footer-links button:hover {
-    color: orange;
-    transform: translateX(5px);
+.footer-links a:hover {
+    color:#ff8c00;
+    transform:translateX(4px);
 }
 
-/* Redes */
+.footer-contact {
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.footer-contact p {
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    margin:0;
+}
+
+.footer-contact i {
+    color:#ff8c00;
+    width:18px;
+    margin-top:3px;
+}
+
 .socials {
-    display: flex;
-    gap: 12px;
+    display:flex;
+    gap:10px;
 }
 
-.socials button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: transparent;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.3s;
+.socials a {
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.22);
+    color:white;
+    text-decoration:none;
+    transition:color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.socials button:hover {
-    color: orange;
-    transform: translateY(-4px);
+.socials a:hover {
+    color:#ff8c00;
+    border-color:#ff8c00;
+    transform:translateY(-3px);
 }
 
-/* Responsive */
-@media(max-width: 900px) {
+.footer-bottom {
+    margin-top:38px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,0.14);
+    color:rgba(255,255,255,0.72);
+    font-size:14px;
+    text-align:center;
+}
+
+@media(max-width: 950px) {
+    .footer-container {
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width: 620px) {
+    .footer {
+        padding:42px 24px 22px;
+    }
 
     .footer-container {
-        flex-direction: column;
-        gap: 40px;
+        grid-template-columns:1fr;
+        gap:30px;
     }
 
-    .logo h2 {
-        font-size: 24px;
+    .footer-logo h2 {
+        font-size:22px;
     }
-
 }
